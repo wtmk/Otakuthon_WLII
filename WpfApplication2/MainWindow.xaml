@@ -37,7 +37,7 @@
                 <DataGridCheckBoxColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <MediaElement x:Name="MediaPlayer" LoadedBehavior="Manual" Margin="20,26,2039,127" />
+        <MediaElement x:Name="MediaPlayer" LoadedBehavior="Manual" Margin="20,26,2025,143" />
         <Button x:Name="btnPlay" FontSize="20" Content="Play" Click="btnPlay_Click" Margin="2224,764,1478,220" RenderTransformOrigin="0.264,5.625"/>
         <Button x:Name="btnStop" FontSize="20" Content="Stop" Click="btnStop_Click" Margin="2396,765,1307,219" RenderTransformOrigin="-4.78,1.36"/>
         <Button x:Name="btnMoveBack" FontSize="20" Content="Back" Click="btnMoveBack_Click" Margin="2567,763,1135,221"/>
