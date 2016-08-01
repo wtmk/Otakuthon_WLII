@@ -1,33 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data;
 using System.IO;
-using Microsoft.VisualBasic.FileIO;
-using System.Configuration;
-using System.Data.OleDb;
-using System.Data.Common;
-using System.Collections;
 using System.ComponentModel;
+using Otakuthon_App.Model;
+using System.Collections.ObjectModel;
+using Otakuthon_App.Data;
 
-namespace WpfApplication2
+
+namespace Otakuthon_App.ViewModel
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window,INotifyPropertyChanged
     {
         public List<string[]> CSVdata { get; set; }
         public DataSet ds = new DataSet("Temp");
@@ -43,41 +33,13 @@ namespace WpfApplication2
 
         public MainWindow()
         {
-            
-           // string read_csv = File.ReadAllText(@"C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Contest_Database_Test.csv");
-            //Viewer_window Admin_window = new Viewer_window();
-           // CSVdata = parseCSV("C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Contest_Database_Test.csv");
+
             InitializeComponent();
             MediaPlayer.Volume = 200;
-            DataContext = this;
-#if DEBUG
-            myList = GetDataTabletFromCSVFile("C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Movies\\csv_list.csv");
-#else
-            myList = GetDataTabletFromCSVFile(@".\Movies\csv_list.csv");
-#endif
-            //myList = GetDataTabletFromCSVFile("C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Movies\\csv_list.csv");
 
-            dataGrid.ItemsSource = myList.AsDataView();
-            //dataGrid.IsReadOnly = true;
-           // Child viewer_window = new Child();
-            //viewer_window.Show();
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Child childWindow = new Child();
-            childWindow.MyEvent += new EventHandler(childWindow_MyEvent);
-
-            childWindow.ShowDialog();
-        }
-
-        void childWindow_MyEvent(object sender, EventArgs e)
-        {
-            // handle event
-            MessageBox.Show("Handle");
-        }
-
-        private void IsPlaying(bool flag)
+          private void IsPlaying(bool flag)
         {
             btnPlay.IsEnabled = flag;
             btnStop.IsEnabled = flag;
@@ -110,13 +72,16 @@ namespace WpfApplication2
 
         private void btnMoveBack_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer.Position -= TimeSpan.FromSeconds(10);
+            MediaPlayer.Stop();
+            MediaPlayer.Position = TimeSpan.Zero;
+            MediaPlayer.Play();
         }
 
         private void btnMoveForward_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer.Position += TimeSpan.FromSeconds(10);
+            
         }
+
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
@@ -137,44 +102,7 @@ namespace WpfApplication2
                 MediaPlayer.Source = new Uri(dialog.FileName);
                 btnPlay.IsEnabled = true;
             }
-        }
-
-        private static DataTable GetDataTabletFromCSVFile(string csv_file_path)
-        {
-            DataTable csvData = new DataTable();
-            try
-            {
-                using (TextFieldParser csvReader = new TextFieldParser(csv_file_path))
-                {
-                    csvReader.SetDelimiters(new string[] { "," });
-                    csvReader.HasFieldsEnclosedInQuotes = true;
-                    string[] colFields = csvReader.ReadFields();
-                    foreach (string column in colFields)
-                    {
-                        DataColumn datecolumn = new DataColumn(column);
-                        datecolumn.AllowDBNull = true;
-                        csvData.Columns.Add(datecolumn);
-                    }
-                    while (!csvReader.EndOfData)
-                    {
-                        string[] fieldData = csvReader.ReadFields();
-                        //Making empty value as null
-                        for (int i = 0; i < fieldData.Length; i++)
-                        {
-                            if (fieldData[i] == "")
-                            {
-                                fieldData[i] = null;
-                            }
-                        }
-                        csvData.Rows.Add(fieldData);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return csvData;
-        }
+        }  
 
         private void button_up_p1_Click(object sender, RoutedEventArgs e)
         {
@@ -250,30 +178,31 @@ namespace WpfApplication2
 
         private void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-           
-        dataGrid.ItemsSource = myList.AsDataView() ;
-
+        
         }
 
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void dataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            
+            
             try
             {
-                DataRowView selectedFile = (System.Data.DataRowView)dataGrid.SelectedItems[0];
-                var selected_video = selectedFile.Row.ItemArray[3];
-                selected_video_name = (string)selected_video;
-                if (selected_video_name != null)
+                Video selectedFile = (Video)dataGrid.SelectedItems[0];
+
+               
+             
+                if (selectedFile.Filename != null)
                 {
 #if DEBUG
-                    string path = "C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Movies\\" + selected_video_name;
+                    string path = "C:\\Users\\AwesomePC\\Documents\\Visual Studio 2015\\Projects\\WpfApplication2\\WpfApplication2\\Movies\\" + selectedFile.Filename;
                     MediaPlayer.Source = new Uri(path);
 #else
-                    string path = "Movies\\" + selected_video_name;
+                    string path = "Movies\\" + selectedFile.Filename;
                     string appPath = System.AppDomain.CurrentDomain.BaseDirectory;
                                MediaPlayer.Source = new Uri(appPath+path);
 #endif
@@ -283,10 +212,11 @@ namespace WpfApplication2
                     MessageBox.Show("Nothing selected!");
                 }
             }
-            catch { }
+            catch (Exception t)
+            { Console.WriteLine("{0} Exception caught.", t);
+            }
         }
 
-      
-    }
+       }
 }
 
