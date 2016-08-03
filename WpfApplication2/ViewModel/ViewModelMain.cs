@@ -13,12 +13,12 @@ using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
+using System.Windows.Controls;
 
 namespace Otakuthon_App.ViewModel
 {
     class ViewModelMain : INotifyPropertyChanged
     {
-        public const string windowname = "ABCDEFG";
         public ObservableCollection<Video> Videos { get; set; }
         public DataTable myList = new DataTable();
         int p1, p2, p3, p4 ,r = 0; 
@@ -116,7 +116,13 @@ namespace Otakuthon_App.ViewModel
                 }
             }
         }
-        public RelayCommand Scoresomething { get; set; }
+        private MediaElement _mediaElementObject;
+
+        public MediaElement MediaElementObject
+        {
+            get { return _mediaElementObject; }
+            set { _mediaElementObject = value; RaisePropertyChanged(""); }
+        }
 
         public ViewModelMain()
         {
@@ -137,6 +143,10 @@ namespace Otakuthon_App.ViewModel
            }
             
             _game = new Game { ScoreP1 = "0", ScoreP2 = "0", ScoreP3 = "0", ScoreP4 = "0", roundPlayCount = "0/7" };
+
+            
+
+
         }
 
         #region Methods

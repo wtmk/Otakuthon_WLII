@@ -2,9 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:Otakuthon_App.ViewModel" 
-        xmlns:wpftoolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:filter="clr-namespace:DataGridFilterLibrary;assembly=DataGridFilterLibrary"
-        xmlns:local="clr-namespace:Otakuthon_App"
         Title="Anime!Whoslineisit? v0.002" Height="1080" Width="3840" ResizeMode="NoResize">
     <Window.DataContext>
         <!-- Declaratively create an instance of our ViewModelMain -->
@@ -26,7 +24,7 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="110" Margin="1450,405,0,0" Stroke="Black" VerticalAlignment="Top" Width="150" Grid.Column="3" Grid.Row="2"/>
 
         <Image x:Name="image" Source="{Binding SourceUri, Mode=OneWay}" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="1279" Grid.RowSpan="3" VerticalAlignment="Top" Width="2041" Margin="-129,-57,0,-171">
-           
+
         </Image>
 
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="110" Margin="1093,530,0,0" Stroke="Black" VerticalAlignment="Top" Width="152" Grid.Column="3" Grid.Row="2"/>
@@ -44,23 +42,14 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="644,518,0,0" Stroke="Black" VerticalAlignment="Top" Width="126" Grid.Column="2" Grid.Row="2"/>
 
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="373,518,0,0" Stroke="Black" VerticalAlignment="Top" Width="125" Grid.Column="2" Grid.Row="2"/>
- 
+
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="717,-82,964,43" Height="44" Width="0" Grid.Column="2">
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0"/>
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" 
-    		ColumnHeaderStyle="{StaticResource {ComponentResourceKey ResourceId=DataGridHeaderFilterControlStyle, TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}}}" 
-    		ItemsSource="{Binding Videos}" 
-    		HorizontalAlignment="Left" 
-    		Margin="439,72,0,0" 
-    		VerticalAlignment="Top" 
-    		Height="659" Width="1316" 
-    		SelectionChanged="dataGrid_SelectionChanged_1" 
-    		SelectedItem="dataGrid_Selected" 
-    		Grid.Column="3" 
-    		Grid.RowSpan="2" 
-    		Grid.Row="1"/>
+        
+        
+        
         <MediaElement x:Name="MediaPlayer" LoadedBehavior="Manual" Margin="373,150,303,242" Grid.Column="2" Grid.RowSpan="2" Grid.Row="1" />
         <Button x:Name="btnPlay" FontSize="20" Content="Play" Click="btnPlay_Click" Margin="539,402,1478,220" RenderTransformOrigin="0.264,5.625" Grid.Column="3" Grid.Row="2"/>
         <Button x:Name="btnStop" FontSize="20" Content="Stop" Click="btnStop_Click" Margin="711,403,1307,219" RenderTransformOrigin="-4.78,1.36" Grid.Column="3" Grid.Row="2"/>
@@ -101,5 +90,6 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="110" Margin="1444,333,0,0" Stroke="Black" VerticalAlignment="Top" Width="150" Grid.Column="2" Grid.Row="2"/>
         <Label x:Name="number_vid_played_Copy" Content="{Binding roundPlayCount}" Grid.Column="2" HorizontalAlignment="Left" Margin="1493,352,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="1.1,0.9" FontSize="26.667"/>
         <Label x:Name="label" Content="videos played this round" Grid.Column="2" HorizontalAlignment="Left" Margin="1449,393,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="0,-0.154"/>
+        <DataGrid x:Name="dataGrid" ColumnHeaderStyle="{StaticResource {ComponentResourceKey ResourceId=DataGridHeaderFilterControlStyle, TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl}}}"  Grid.Column="3" HorizontalAlignment="Left" Height="648" Margin="495,95,0,0" Grid.Row="1" SelectionChanged="dataGrid_SelectionChanged_1"  Grid.RowSpan="2" VerticalAlignment="Top" Width="1365" ItemsSource="{Binding Videos}"/>
     </Grid>
 </Window>

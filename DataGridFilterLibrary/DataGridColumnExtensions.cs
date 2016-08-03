@@ -15,6 +15,7 @@ namespace DataGridFilterLibrary
 
         public static bool GetIsCaseSensitiveSearch(DependencyObject target)
         {
+            
             return (bool)target.GetValue(IsCaseSensitiveSearchProperty);
         }
 
