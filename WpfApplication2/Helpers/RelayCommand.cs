@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Otakuthon_App.Helpers
@@ -12,49 +13,54 @@ namespace Otakuthon_App.Helpers
 
     public class RelayCommand : ICommand
     {
-        #region Fields
-
-        readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
-
-        #endregion // Fields
+        #region Members
+        readonly Func<Boolean> _canExecute;
+        readonly Action _execute;
+        #endregion
 
         #region Constructors
-
-        public RelayCommand(Action<object> execute)
+        public RelayCommand(Action execute)
             : this(execute, null)
         {
         }
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action execute, Func<Boolean> canExecute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
-
             _execute = execute;
             _canExecute = canExecute;
         }
-        #endregion // Constructors
+        #endregion
 
         #region ICommand Members
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null ? true : _canExecute(parameter);
-        }
-
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add
+            {
+
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested -= value;
+            }
         }
 
-        public void Execute(object parameter)
+        [DebuggerStepThrough]
+        public Boolean CanExecute(Object parameter)
         {
-            _execute(parameter);
+            return _canExecute == null ? true : _canExecute();
         }
 
-        #endregion // ICommand Members
+        public void Execute(Object parameter)
+        {
+            _execute();
+        }
+        #endregion
     }
 
 }

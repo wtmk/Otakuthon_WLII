@@ -19,6 +19,7 @@ namespace Otakuthon_App.ViewModel
     /// 
     public partial class MainWindow : Window,INotifyPropertyChanged
     {
+       
         public List<string[]> CSVdata { get; set; }
         public DataSet ds = new DataSet("Temp");
         public DataTable myList = new DataTable();
@@ -35,7 +36,7 @@ namespace Otakuthon_App.ViewModel
         {
 
             InitializeComponent();
-            MediaPlayer.Volume = 200;
+            MediaPlayer.Volume = 400;
 
         }
 
@@ -44,7 +45,6 @@ namespace Otakuthon_App.ViewModel
             btnPlay.IsEnabled = flag;
             btnStop.IsEnabled = flag;
             btnMoveBack.IsEnabled = flag;
-            btnMoveForward.IsEnabled = flag;
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
@@ -77,13 +77,7 @@ namespace Otakuthon_App.ViewModel
             MediaPlayer.Play();
         }
 
-        private void btnMoveForward_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
+                private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             // Configure open file dialog box 
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -104,61 +98,61 @@ namespace Otakuthon_App.ViewModel
             }
         }  
 
-        private void button_up_p1_Click(object sender, RoutedEventArgs e)
-        {
-            p1_score++;
-            p1_score_label = p1_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p1_score_label)));
-        }
-
-        private void button_down_p1_Click(object sender, RoutedEventArgs e)
-        {
-            p1_score--;
-            p1_score_label = p1_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p1_score_label)));
-        }
-
-        private void button_up_p2_Click(object sender, RoutedEventArgs e)
-        {
-            p2_score++;
-            p2_score_label = p2_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p2_score_label)));
-        }
-
-        private void button_down_p2_Click(object sender, RoutedEventArgs e)
-        {
-            p2_score--;
-            p2_score_label = p2_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p2_score_label)));
-        }
-
-        private void button_up_p3_Click(object sender, RoutedEventArgs e)
-        {
-            p3_score++;
-            p3_score_label = p3_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p3_score_label)));
-        }
-
-        private void button_down_p3_Click(object sender, RoutedEventArgs e)
-        {
-            p3_score--;
-            p3_score_label = p3_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p3_score_label)));
-        }
-
-        private void button_up_p4_Click(object sender, RoutedEventArgs e)
-        {
-            p4_score++;
-            p4_score_label = p4_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p4_score_label)));
-        }
-
-        private void button_down_p4_Click(object sender, RoutedEventArgs e)
-        {
-            p4_score--;
-            p4_score_label = p4_score.ToString();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p4_score_label)));
-        }
+       //private void button_up_p1_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p1_score++;
+       //    p1_score_label = p1_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p1_score_label)));
+       //}
+       //
+       //private void button_down_p1_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p1_score--;
+       //    p1_score_label = p1_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p1_score_label)));
+       //}
+       //
+       //private void button_up_p2_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p2_score++;
+       //    p2_score_label = p2_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p2_score_label)));
+       //}
+       //
+       //private void button_down_p2_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p2_score--;
+       //    p2_score_label = p2_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p2_score_label)));
+       //}
+       //
+       //private void button_up_p3_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p3_score++;
+       //    p3_score_label = p3_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p3_score_label)));
+       //}
+       //
+       //private void button_down_p3_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p3_score--;
+       //    p3_score_label = p3_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p3_score_label)));
+       //}
+       //
+       //private void button_up_p4_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p4_score++;
+       //    p4_score_label = p4_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p4_score_label)));
+       //}
+       //
+       //private void button_down_p4_Click(object sender, RoutedEventArgs e)
+       //{
+       //    p4_score--;
+       //    p4_score_label = p4_score.ToString();
+       //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(p4_score_label)));
+       //}
 
         private void button_reset_Click(object sender, RoutedEventArgs e)
         {

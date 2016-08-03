@@ -83,7 +83,6 @@
     <Compile Include="Data\Database.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Model\Game.cs" />
-    <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelMain.cs" />
